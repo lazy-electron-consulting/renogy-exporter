@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/lazy-electron-consulting/renology-exporter/internal/metrics"
+	"github.com/lazy-electron-consulting/renology-exporter/internal/renology"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
@@ -24,6 +26,15 @@ func Run(ctx context.Context, cfg *Config) error {
 	ctx, stop := context.WithCancel(ctx)
 	defer stop()
 	defer logger.Println("stopped")
+	r, err := renology.New(cfg.Path)
+	if err != nil {
+		return err
+	}
+	defer r.Close()
+	err = metrics.Register(r)
+	if err != nil {
+		return err
+	}
 
 	return runHttp(ctx, cfg)
 }

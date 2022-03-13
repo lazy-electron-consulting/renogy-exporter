@@ -1,0 +1,85 @@
+---
+gauges:
+  - name: "battery_volts"
+    help: "How many volts are in the battery"
+    address: 0x101
+    multiplier: 0.1
+  - name: "battery_charge_amps"
+    help: "How many amps are going into the battery"
+    address: 0x102
+    multiplier: 0.01
+  - name: "battery_capacity_percent"
+    help: "The percentage of battery's remaining capacity"
+    address: 0x100
+  - name: "solar_volts"
+    help: "How many volts are coming from solar"
+    address: 0x107
+    multiplier: 0.1
+  - name: "solar_amps"
+    help: "How many amps are coming from solar"
+    address: 0x108
+    multiplier: 0.01
+  - name: "charge_watts"
+    help: "charging power"
+    address: 0x109
+  - name: "inside_case_temp"
+    help: "Temperature inside case, celsius"
+    address: 0x103
+    byte: 0
+    signed: true
+  - name: "battery_temp"
+    help: "Temperature at the battery probe, celsius"
+    address: 0x103
+    byte: 1
+    signed: true
+
+---
+# TODO: support these weirder metrics
+
+# HELP charge_controller_battery_status Battery status
+# TYPE charge_controller_battery_status gauge
+# charge_controller_battery_status{charge_controller_battery_status="fault"} 0.0
+# charge_controller_battery_status{charge_controller_battery_status="low volt disconnect"} 0.0
+# charge_controller_battery_status{charge_controller_battery_status="normal"} 1.0
+# charge_controller_battery_status{charge_controller_battery_status="over volt"} 0.0
+# charge_controller_battery_status{charge_controller_battery_status="under volt"} 0.0
+
+# HELP charge_controller_charge_status Charging status
+# TYPE charge_controller_charge_status gauge
+# charge_controller_charge_status{charge_controller_charge_status="boost"} 0.0
+# charge_controller_charge_status{charge_controller_charge_status="equalize"} 0.0
+# charge_controller_charge_status{charge_controller_charge_status="float"} 0.0
+# charge_controller_charge_status{charge_controller_charge_status="none"} 1.0
+
+# HELP charge_controller_input_volt_status Input volt status
+# TYPE charge_controller_input_volt_status gauge
+# charge_controller_input_volt_status{charge_controller_input_volt_status="error"} 0.0
+# charge_controller_input_volt_status{charge_controller_input_volt_status="high"} 0.0
+# charge_controller_input_volt_status{charge_controller_input_volt_status="no power"} 0.0
+# charge_controller_input_volt_status{charge_controller_input_volt_status="normal"} 1.0
+
+# HELP charge_controller_configured_battery_type Battery type
+# TYPE charge_controller_configured_battery_type gauge
+# charge_controller_configured_battery_type{charge_controller_configured_battery_type="Flooded"} 0.0
+# charge_controller_configured_battery_type{charge_controller_configured_battery_type="Gel"} 0.0
+# charge_controller_configured_battery_type{charge_controller_configured_battery_type="Sealed"} 1.0
+# charge_controller_configured_battery_type{charge_controller_configured_battery_type="User defined"} 0.0
+
+# HELP charge_controller_configured_battery_capacity_ah Rated capacity of the battery (amp hours)
+# TYPE charge_controller_configured_battery_capacity_ah gauge
+# charge_controller_configured_battery_capacity_ah 100.0
+
+# HELP charge_controller_configured_voltage various voltage configuration settings
+# TYPE charge_controller_configured_voltage gauge
+# charge_controller_configured_voltage{name="high disconnect"} 16.0
+# charge_controller_configured_voltage{name="charge limit"} 15.0
+# charge_controller_configured_voltage{name="over-volt reconnect"} 15.0
+# charge_controller_configured_voltage{name="equalization"} 14.6
+# charge_controller_configured_voltage{name="boost"} 14.4
+# charge_controller_configured_voltage{name="float"} 13.8
+# charge_controller_configured_voltage{name="boost reconnect"} 13.2
+# charge_controller_configured_voltage{name="low"} 12.6
+# charge_controller_configured_voltage{name="under-volt recover"} 12.2
+# charge_controller_configured_voltage{name="under-volt warn"} 12.0
+# charge_controller_configured_voltage{name="low-volt disconnect"} 11.1
+# charge_controller_configured_voltage{name="discharge limit warn"} 10.6
