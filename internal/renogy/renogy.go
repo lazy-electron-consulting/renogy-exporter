@@ -22,7 +22,7 @@ func New(cfg *config.Modbus) (*Renogy, error) {
 	handler.DataBits = cfg.DataBits
 	handler.Parity = cfg.Parity
 	handler.StopBits = cfg.StopBits
-	handler.SlaveId = byte(cfg.UnitID)
+	handler.SlaveId = cfg.UnitID
 	handler.Timeout = cfg.Timeout
 	if err := handler.Connect(); err != nil {
 		logger.Printf("failed to connect %v\n", err)
