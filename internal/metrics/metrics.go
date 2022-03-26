@@ -14,7 +14,7 @@ const subsystem = "charge_controller"
 
 var logger = log.New(log.Writer(), "[metrics] ", log.Lmsgprefix|log.Flags())
 
-//go:embed renology.yaml
+//go:embed renogy.yaml
 var rawConfig []byte
 
 type register struct {
