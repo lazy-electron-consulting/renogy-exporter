@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/lazy-electron-consulting/renology-exporter/internal/start"
+	"github.com/lazy-electron-consulting/renogy-exporter/internal/start"
 )
 
 var logger = log.New(log.Writer(), "[main] ", log.Lmsgprefix|log.Flags())

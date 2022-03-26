@@ -1,9 +1,9 @@
-# renology-exporter
+# renogy-exporter
 
 [Prometheus exporter](https://prometheus.io/docs/instrumenting/exporters/) for
-Renology charge controllers.
+Renogy charge controllers.
 
-Usage: `./renology-exporter /dev/ttyUSB0 --port 8080`
+Usage: `./renogy-exporter /dev/ttyUSB0 --port 8080`
 
 ## References
 

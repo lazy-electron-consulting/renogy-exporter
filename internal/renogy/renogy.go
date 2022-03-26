@@ -1,4 +1,4 @@
-package renology
+package renogy
 
 import (
 	_ "embed"
@@ -9,14 +9,14 @@ import (
 	"github.com/goburrow/modbus"
 )
 
-var logger = log.New(log.Writer(), "[renology] ", log.Lmsgprefix|log.Flags())
+var logger = log.New(log.Writer(), "[renogy] ", log.Lmsgprefix|log.Flags())
 
-type Renology struct {
+type Renogy struct {
 	handler *modbus.RTUClientHandler
 	client  modbus.Client
 }
 
-func New(path string) (*Renology, error) {
+func New(path string) (*Renogy, error) {
 	handler := modbus.NewRTUClientHandler(path)
 	handler.BaudRate = 9600
 	handler.DataBits = 8
@@ -29,15 +29,15 @@ func New(path string) (*Renology, error) {
 		return nil, err
 	}
 
-	return &Renology{
+	return &Renogy{
 		handler: handler,
 		client:  modbus.NewClient(handler),
 	}, nil
 }
 
-func (r *Renology) Close() error { return r.handler.Close() }
+func (r *Renogy) Close() error { return r.handler.Close() }
 
-func (r *Renology) ReadUint16(address uint16) (uint16, error) {
+func (r *Renogy) ReadUint16(address uint16) (uint16, error) {
 	raw, err := r.client.ReadHoldingRegisters(address, 1)
 	if err != nil {
 		return 0, err
@@ -45,6 +45,6 @@ func (r *Renology) ReadUint16(address uint16) (uint16, error) {
 	return binary.BigEndian.Uint16(raw), nil
 }
 
-func (r *Renology) Read(address uint16) ([]byte, error) {
+func (r *Renogy) Read(address uint16) ([]byte, error) {
 	return r.client.ReadHoldingRegisters(address, 1)
 }
