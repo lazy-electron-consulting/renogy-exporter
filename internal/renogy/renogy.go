@@ -4,9 +4,9 @@ import (
 	_ "embed"
 	"encoding/binary"
 	"log"
-	"time"
 
 	"github.com/goburrow/modbus"
+	"github.com/lazy-electron-consulting/renogy-exporter/internal/config"
 )
 
 var logger = log.New(log.Writer(), "[renogy] ", log.Lmsgprefix|log.Flags())
@@ -16,14 +16,14 @@ type Renogy struct {
 	client  modbus.Client
 }
 
-func New(path string) (*Renogy, error) {
-	handler := modbus.NewRTUClientHandler(path)
-	handler.BaudRate = 9600
-	handler.DataBits = 8
-	handler.Parity = "N"
-	handler.StopBits = 1
-	handler.SlaveId = 1
-	handler.Timeout = 5 * time.Second
+func New(cfg *config.Modbus) (*Renogy, error) {
+	handler := modbus.NewRTUClientHandler(cfg.Path)
+	handler.BaudRate = cfg.BaudRate
+	handler.DataBits = cfg.DataBits
+	handler.Parity = cfg.Parity
+	handler.StopBits = cfg.StopBits
+	handler.SlaveId = byte(cfg.UnitID)
+	handler.Timeout = cfg.Timeout
 	if err := handler.Connect(); err != nil {
 		logger.Printf("failed to connect %v\n", err)
 		return nil, err

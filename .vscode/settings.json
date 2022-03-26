@@ -1,6 +1,19 @@
 {
     "cSpell.words": [
+        "Lmsgprefix",
         "modbus",
-        "Renogy"
-    ]
+        "Renogy",
+        "stretchr",
+        "umarshall"
+    ],
+    "go.lintTool": "golangci-lint",
+    "go.survey.prompt": false,
+    "go.testFlags": ["-race"],
+    "go.addTags": {
+        "tags": "json,yaml",
+        "options": "json=omitempty,yaml=omitempty",
+        "promptForTags": false,
+        "transform": "camelcase",
+        "template": ""
+    }
 }
