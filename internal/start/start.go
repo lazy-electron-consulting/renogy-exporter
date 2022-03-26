@@ -2,10 +2,10 @@ package start
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 
+	"github.com/lazy-electron-consulting/renogy-exporter/internal/config"
 	"github.com/lazy-electron-consulting/renogy-exporter/internal/metrics"
 	"github.com/lazy-electron-consulting/renogy-exporter/internal/renogy"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -13,35 +13,29 @@ import (
 
 var logger = log.New(log.Writer(), "[start] ", log.Lmsgprefix|log.Flags())
 
-// Config carries all the inputs needed to run the exporter
-type Config struct {
-	Port int
-	Path string
-}
-
 // Run starts the server and runs until the given context is canceled
-func Run(ctx context.Context, cfg *Config) error {
+func Run(ctx context.Context, cfg *config.Config) error {
 	logger.Println("starting")
 
 	ctx, stop := context.WithCancel(ctx)
 	defer stop()
 	defer logger.Println("stopped")
-	r, err := renogy.New(cfg.Path)
+	r, err := renogy.New(cfg.Modbus)
 	if err != nil {
 		return err
 	}
 	defer r.Close()
-	err = metrics.Register(r)
+	err = metrics.Register(r, cfg.Gauges)
 	if err != nil {
 		return err
 	}
 
-	return runHttp(ctx, cfg)
+	return runHttp(ctx, cfg.Address)
 }
 
-func runHttp(ctx context.Context, cfg *Config) error {
+func runHttp(ctx context.Context, addr string) error {
 	http.Handle("/metrics", promhttp.Handler())
-	srv := &http.Server{Addr: fmt.Sprintf(":%d", cfg.Port)}
+	srv := &http.Server{Addr: addr}
 	go func() {
 		<-ctx.Done()
 		srv.Close()

@@ -1,0 +1,23 @@
+---
+address: ":8080"
+modbus:
+  path: /dev/ttyS0
+  baudRate: 19200
+  dataBits: 8
+  stopBits: 1
+  parity: N
+  timeout: 5m
+  unitId: 2
+gauges:
+  - name: "16bit"
+    help: "16bit int"
+    address: 0x100      
+  - name: "8bit"
+    help: "8bit int"
+    address: 0x101
+    byte: 1
+    signed: true
+  - name: "16bit with multiplier"
+    help: "16bit int"
+    address: 0x102
+    multiplier: 0.1

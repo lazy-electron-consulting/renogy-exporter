@@ -1,4 +1,6 @@
 ---
+modbus:
+  path: /dev/ttyUSB0
 gauges:
   - name: "battery_volts"
     help: "How many volts are in the battery"
