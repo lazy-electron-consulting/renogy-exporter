@@ -41,8 +41,8 @@ func (m *Modbus) Defaults() {
 }
 
 type State struct {
-	Name  string `json:"name,omitempty" yaml:"name,omitempty"`
-	Value uint16 `json:"value,omitempty" yaml:"value,omitempty"`
+	Name  string  `json:"name,omitempty" yaml:"name,omitempty"`
+	Value float64 `json:"value,omitempty" yaml:"value,omitempty"`
 }
 
 type Gauge struct {
