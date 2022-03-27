@@ -21,3 +21,13 @@ gauges:
     help: "16bit int"
     address: 0x102
     multiplier: 0.1
+  - name: "status gauge"
+    help: "maps from values to names"
+    address: 0x103
+    states:
+      - name: "none"
+        value: 0
+      - name: "ok"
+        value: 1
+      - name: "great"
+        value: 0xff

@@ -34,7 +34,25 @@ gauges:
     address: 0x103
     byte: 1
     signed: true
-
+  - name: "charge_status"
+    help: "Charging status"
+    address: 0x120
+    byte: 1
+    states:
+      - name: "none"
+        value: 0
+      - name: "charging"
+        value: 1
+      - name: "mppt"
+        value: 2
+      - name: "equalize"
+        value: 3
+      - name: "boost"
+        value: 4
+      - name: "float"
+        value: 5
+      - name: "current limiting"
+        value: 6
 ---
 # TODO: support these weirder metrics
 
@@ -46,12 +64,6 @@ gauges:
 # charge_controller_battery_status{charge_controller_battery_status="over volt"} 0.0
 # charge_controller_battery_status{charge_controller_battery_status="under volt"} 0.0
 
-# HELP charge_controller_charge_status Charging status
-# TYPE charge_controller_charge_status gauge
-# charge_controller_charge_status{charge_controller_charge_status="boost"} 0.0
-# charge_controller_charge_status{charge_controller_charge_status="equalize"} 0.0
-# charge_controller_charge_status{charge_controller_charge_status="float"} 0.0
-# charge_controller_charge_status{charge_controller_charge_status="none"} 1.0
 
 # HELP charge_controller_input_volt_status Input volt status
 # TYPE charge_controller_input_volt_status gauge
