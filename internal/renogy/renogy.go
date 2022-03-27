@@ -45,6 +45,8 @@ func (r *Renogy) ReadUint16(address uint16) (uint16, error) {
 	return binary.BigEndian.Uint16(raw), nil
 }
 
+// Read pulls 2 bytes of raw content from memory. On modbus docs, byte[0] are
+// the high bits, byte[1] are the low bits
 func (r *Renogy) Read(address uint16) ([]byte, error) {
 	return r.client.ReadHoldingRegisters(address, 1)
 }
