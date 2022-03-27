@@ -1,16 +1,10 @@
-name: "pre-release"
+name: "release"
 on:
   push: 
-    branches: [main]
-    paths:
-      - "go.sum"
-      - "go.mod"
-      - "**.go"
-      - "Makefile"
-      - ".github/workflows/pre-release.yaml"
+    tags: ["v*"]
 
 jobs:
-  pre-release:
+  tagged-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,9 +23,7 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
+          prerelease: false
           files: |
             dist/*
             LICENSE

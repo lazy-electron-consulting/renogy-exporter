@@ -5,10 +5,8 @@ on:
       - "go.sum"
       - "go.mod"
       - "**.go"
-      - ".github/workflows/ci.yaml"
       - "Makefile"
-  push:
-    branches: [main]
+      - ".github/workflows/ci.yaml"
 
 jobs:
   build:
