@@ -31,13 +31,18 @@ type Modbus struct {
 	Timeout  time.Duration `json:"timeout,omitempty" yaml:"timeout,omitempty"`
 }
 
-func (m *Modbus) defaults() {
+func (m *Modbus) Defaults() {
 	m.BaudRate = util.Default(m.BaudRate, DefaultBaudRate)
 	m.DataBits = util.Default(m.DataBits, DefaultDataBits)
 	m.StopBits = util.Default(m.StopBits, DefaultStopBits)
 	m.Parity = util.Default(m.Parity, DefaultParity)
 	m.Timeout = util.Default(m.Timeout, DefaultTimeout)
 	m.UnitID = util.Default(m.UnitID, DefaultUnitID)
+}
+
+type State struct {
+	Name  string  `json:"name,omitempty" yaml:"name,omitempty"`
+	Value float64 `json:"value,omitempty" yaml:"value,omitempty"`
 }
 
 type Gauge struct {
@@ -47,6 +52,7 @@ type Gauge struct {
 	Byte       *uint8  `json:"byte,omitempty" yaml:"byte,omitempty"`
 	Signed     bool    `json:"signed,omitempty" yaml:"signed,omitempty"`
 	Multiplier float32 `json:"multiplier,omitempty" yaml:"multiplier,omitempty"`
+	States     []State `json:"states,omitempty" yaml:"states,omitempty"`
 }
 
 type Config struct {
@@ -58,7 +64,7 @@ type Config struct {
 func (c *Config) defaults() {
 	c.Address = util.Default(c.Address, DefaultAddress)
 	c.Modbus = util.Default(c.Modbus, &Modbus{})
-	c.Modbus.defaults()
+	c.Modbus.Defaults()
 }
 
 // ParseYaml reads yaml-formatted config in strict mode, filling in any default

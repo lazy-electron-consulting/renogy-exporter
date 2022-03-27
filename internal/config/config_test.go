@@ -42,6 +42,14 @@ func TestParseYaml(t *testing.T) {
 					{Name: "16bit", Help: "16bit int", Address: 0x100},
 					{Name: "8bit", Help: "8bit int", Address: 0x101, Byte: util.Ptr(uint8(1)), Signed: true},
 					{Name: "16bit with multiplier", Help: "16bit int", Address: 0x102, Multiplier: 0.1},
+					{
+						Name: "status gauge", Help: "maps from values to names", Address: 0x103,
+						States: []config.State{
+							{Name: "none", Value: 0},
+							{Name: "ok", Value: 1},
+							{Name: "great", Value: 255},
+						},
+					},
 				},
 			},
 		},
