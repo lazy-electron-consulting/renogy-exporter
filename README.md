@@ -11,7 +11,7 @@ Renogy charge controllers.
 - run `./renogy-exporter config.yaml`
 - see your metrics via http
 
-See `renogy.yaml` for an example of the config syntax that works for me.
+See `configs/` for an example of the config syntax.
 
 ## Releasing
 

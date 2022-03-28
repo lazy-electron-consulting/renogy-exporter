@@ -35,3 +35,4 @@ jobs:
           files: |
             dist/*
             LICENSE
+            configs/*
