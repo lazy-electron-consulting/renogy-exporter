@@ -1,6 +1,12 @@
 ---
 modbus:
   path: /dev/ttyUSB0
+  baudRate: 9600
+  dataBits: 8
+  stopBits: 1
+  parity: N
+  timeout: 5s
+  unitId: 1
 gauges:
   - name: "battery_volts"
     help: "How many volts are in the battery"
