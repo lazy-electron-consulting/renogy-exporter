@@ -135,7 +135,7 @@ func (c statesetCollector) Collect(ch chan<- prometheus.Metric) {
 	for _, s := range c.states {
 		state := c.WithLabelValues(s.Name)
 		// TODO: skip the float64 steps
-		if math.Abs(s.Value-val) < 1 {
+		if val > -1 && math.Abs(s.Value-val) < 1 {
 			state.Set(1)
 		} else {
 			state.Set(0)
